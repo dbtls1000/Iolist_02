@@ -30,7 +30,7 @@ public class ProductService {
 		List<ProductVO> pdrList = pDao.selectAll();
 		
 		for (ProductVO vo : pdrList) {
-			System.out.printf("%s\t\t%s\t\t%d\t%d\n", 
+			System.out.printf("%s\t\t%s\t\t%d\t\t%d\n", 
 						vo.getP_code(), 
 						vo.getP_name(), 
 						vo.getP_iprice(), 
@@ -77,8 +77,11 @@ public class ProductService {
 
 		ProductVO vo = new ProductVO(strPcode, strPname, intIprice, intOprice);
 		System.out.println(vo);
-		if (pDao.insert(vo) > 0)
+		if (pDao.insert(vo) > 0) {
+			System.out.println("상품정보를 추가하였습니다.");
 			return true;
+		}
+			
 		else
 			return false;
 
@@ -113,7 +116,10 @@ public class ProductService {
 		vo.setP_iprice(iPrice);
 		vo.setP_oprice(oPrice);
 		
-		if(pDao.update(vo)>0)	return true;
+		if(pDao.update(vo)>0)	{
+			System.out.println("상품정보를 수정하였습니다.");
+			return true;
+		}
 		else return false;
 	}
 
@@ -127,7 +133,10 @@ public class ProductService {
 		System.out.print("정말로 삭제하시겠습니까 ? 1.Yes 2.No");
 		String confirm = scan.nextLine();
 		if(confirm.equals("1")) {
-			if(pDao.delete(strPcode)>0) return true;
+			if(pDao.delete(strPcode)>0) {
+				System.out.println("상품정보를 삭제하였습니다.");
+				return true;
+			}
 			else return false;
 		}
 		return false;
